@@ -1,0 +1,57 @@
+Write a PL/SQL program to find largest number of three numbers using if-elsif statement.
+
+declare
+
+x number;
+
+y number;
+
+z number;
+
+begin
+
+x:=&number1;
+
+y:=&number2;
+
+z:=&number3;
+
+if x>y and x>z then
+
+dbms_output.put_line('x is largest');
+
+elsif y>x and y>z then
+
+dbms_output.put_line('y is largest');
+
+else
+
+dbms_output.put_line('z is largest');
+
+end if;
+
+end;
+
+/
+
+Enter value for number1: 7
+
+old 7: x:=&number1;
+
+new 7: x:=7;
+
+Enter value for number2: 2
+
+old 8: y:=&number2;
+
+new 8: y:=2;
+
+Enter value for number3: 3
+
+old 9: z:=&number3;
+
+new 9: z:=3;
+
+x is largest
+
+PL/SQL procedure successfully completed.
