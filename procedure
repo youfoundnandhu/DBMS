@@ -1,0 +1,13 @@
+
+SQL> CREATE OR REPLACE PROCEDURE hero
+  2  AS
+  3  begin
+  4  dbms_output.Put_line('nandhu');
+  5  END;
+  6  /
+
+Procedure created.
+
+SQL> execute hero
+
+PL/SQL procedure successfully completed.
