@@ -1,0 +1,105 @@
+ADDITION OF ANY TWO NUMBERS
+
+Declare
+
+Var1 integer;
+
+Var2 integer;
+
+Var3 integer;
+
+Begin
+
+Var1:=&var1;
+
+Var2:=&var2;
+
+Var3:=var1+var2;
+
+Dbms_output.put_line(var3);
+
+End;
+
+/
+
+Enter value for var1: 5
+
+old 6: Var1:=&var1;
+
+new 6: Var1:=5;
+
+Enter value for var2: 6
+
+old 7: Var2:=&var2;
+
+new 7: Var2:=6;
+
+11
+
+PL/SQL procedure successfully completed.
+
+__________________________________________________________________
+
+begin
+
+dbms_output.put_line('This is my first PL/SQL Program');
+
+dbms_output.put_line('PL/SQL is a procedural Language');
+
+dbms_output.put_line('I like PL/SQL');
+
+end;
+
+/
+
+This is my first PL/SQL Program
+
+PL/SQL is a procedural Language
+
+I like PL/SQL
+
+*****************************************
+
+declare
+
+num1 number;
+
+num2 number;
+
+num3 number;
+
+begin
+
+num1:=20;
+
+num2:=15;
+
+num3:=num1+num2;
+
+dbms_output.put_line('The sum of '||num1||' and '||num2||' is '||num3);
+
+num3:=num1-num2;
+
+dbms_output.put_line('The subtraction of '||num1||' and '||num2||' is'||num3);
+
+num3:=num1*num2;
+
+dbms_output.put_line('The multiplication of '||num1||' and '||num2||'is '||num3);
+
+num3:=num1/num2;
+
+dbms_output.put_line('The division of '||num1||' and '||num2||' is '||num3);
+
+end;
+
+/
+
+The sum of 20 and 15 is 35
+
+The subtraction of 20 and 15 is5
+
+The multiplication of 20 and 15is 300
+
+The division of 20 and 15 is 1.33333333333333333333333333333333333333
+
+PL/SQL procedure successfully completed.
