@@ -1,0 +1,83 @@
+QUESTIONS
+  
+  1.Create database stud and collection named details
+ use stud
+db.createCollection('details');
+2. Insert 10 data to that collection
+db.details.insert({roll:1,sname:'ram',dpmt:'cse',sem:2,cgpa:7});
+db.details.insert({roll:2,sname:'sam',dpmt:'it',sem:3,cgpa:5});
+db.details.insert({roll:3,sname:'dane',dpmt:'ai',sem:6,cgpa:6});
+db.details.insert({roll:4,sname:'mary',dpmt:'ece',sem:5,cgpa:6});
+db.details.insert({roll:5,sname:'rani',dpmt:'eee',sem:5,cgpa:8});
+db.details.insert({roll:6,sname:'rony',dpmt:'cse',sem:4,cgpa:8});
+db.details.insert({roll:7,sname:'ajay',dpmt:'cse',sem:4,cgpa:7});
+db.details.insert({roll:8,sname:'jony',dpmt:'cse',sem:3,cgpa:6});
+db.details.insert({roll:9,sname:'sony',dpmt:'eee',sem:3,cgpa:6});
+db.details.insert({roll:10,sname:'sradha',dpmt:'eee',sem:7,cgpa:9});
+3. show all the data in that collection
+ db.details.find()
+4.Display all the students in cse
+ db.details.find({dpmt:'cse'});
+5. Display students in ascending order of name
+ db.details.find().sort({sname:1});
+6.List first five students
+stud> db.details.find().limit(5)
+7.Display  students 5,6,7
+stud> db.details.find().skip(4).limit(3)
+8. Display students details of 5,6,7 in descending order of percentage
+db.details.find().sort({cgpa:-1}).skip(4).limit(3)
+9.display all students in ascending order of cgpa
+db.details.find().sort({cgpa:-1});
+10. Display the number of students in eee
+db.details.find({dpmt:'eee'}).count();
+11.Display all the degrees without _id
+db.details.find({},{_id:0})
+12.display all students in cse and sem 4
+db.details.find({$and:[{dpmt:'cse'},{sem:4}]})
+13.display all students with cgpa range 4 and 7
+db.details.find({cgpa:{$gt:4,$lt:7}});
+14.Display all students in dpmt cse
+db.details.find({dpmt:'cse'});
+15.Display cgpa of jony
+db.details.find({sname:'jony'},{cgpa:1})
+16.Display department of ajay
+db.details.find({sname:'ajay'},{dpmt:1})
+17. Display all students whose cgpa greater than 7
+db.details.find({cgpa:{$gt:7}});
+18.Diplay students whose department is in eee or ai
+db.details.find({dpmt:{$in:['eee','ai']}});
+19.Find all students whose name starts with j
+db.details.find({sname:/^j/});
+20.Find names of all students whose dpmt in eee and cgpa 9
+db.details.find({dpmt:'eee',cgpa:9},{sname:1});
+21. Display the details of the student who secured the highest cgpa in the course cse.
+db.details.find({dpmt:"cse"}).sort({cgpa:-1}).limit(1)
+22.Display students in cse in descending order of cgpa
+db.details.find({dpmt:"cse"}).sort({cgpa:-1})
+23.Display students in cse ascending order of cgpa
+db.details.find({dpmt:"cse"}).sort({cgpa:1})
+24.Display student in cse who have lowest cgpa
+db.details.find({dpmt:"cse"}).sort({cgpa:1})
+25. Display the names of the top three students in the cse dpmt.
+db.details.find({dpmt:'eee'},{sname:1}).sort({cgpa:-1}).limit(3)
+26.Display  the names and sem of student who have cgpa greater than 6 and in cse dpmt
+db.details.find({dpmt:'cse',cgpa:{$gt:6}},{sname:1,sem:1})
+27. Display  name and sem of  one student who have cgpa greater than 6 and in cse dpmt
+db.details.find({dpmt:'cse',cgpa:{$gt:6}},{sname:1,sem:1}).limit(1)
+28.Display details of students who have cgpa greater than 6 and less than 9
+db.details.find({cgpa:{$gt:6,$lt:9}})
+29 Display all students in eee dpmt
+db.details.find({dpmt:'eee'})
+30.Display students who not belong to either cse,eee,ece
+db.details.find({dpmt:{$nin:['cse','ece','eee']}})
+31.Display all sem 3 students who belong to either cse,eee, ece
+db.details.find({$and:[{sem:3},{dpmt:{$in:['cse','ece','eee']}}]})
+32.Update sem of ram to 4
+db.details.updateOne({sname:'ram'},{$set:{sem:4}})
+33.update multiple records
+Update all students in dpmt eee as sem2
+db.details.updateMany({dpmt:'eee'},{$set:{sem:2}})  
+34. delete student of roll no 3
+db.details.deleteOne({roll:3})
+35. delete students who have cgpa greater than 8
+db.details.deleteMany({cgpa:{$gt:8}})
