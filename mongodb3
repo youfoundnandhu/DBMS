@@ -1,0 +1,155 @@
+                       GIVEN PROBLEM FOR LAB WORK
+==============================================================================
+problem
+1.create database named univ and collection named s1mca
+2.List all female students
+3.List all male students
+4.Find total number of students in each department
+5.display dpmt name and sum of all male employees in each department
+6.display dpmt name and avg marks in each department
+
+
+-------------------------------------------
+CODE
+============
+1) college> use univ;
+switched to db univ
+univ> db.mca.insertMany([{roll:1,name:'ram',age:20,div:'A',dept:"ai",mark:50,gender:"male"},{roll:2,name:'sam',age:20,div:'A',dept:"ai",mark:51,gender:"male"},{roll:3,name:'tam',age:20,div:'B',dept:"Ml",mark:52,gender:"male"},{roll:4,name:'dam',age:21,div:'C',dept:"mca",mark:60,gender:"male"}]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('6613b3d17fb445125b8bf209'),
+    '1': ObjectId('6613b3d17fb445125b8bf20a'),
+    '2': ObjectId('6613b3d17fb445125b8bf20b'),
+    '3': ObjectId('6613b3d17fb445125b8bf20c')
+  }
+}
+univ> db.mca.find();
+[
+  {
+    _id: ObjectId('6613b3d17fb445125b8bf209'),
+    roll: 1,
+    name: 'ram',
+    age: 20,
+    div: 'A',
+    dept: 'ai',
+    mark: 50,
+    gender: 'male'
+  },
+  {
+    _id: ObjectId('6613b3d17fb445125b8bf20a'),
+    roll: 2,
+    name: 'sam',
+    age: 20,
+    div: 'A',
+    dept: 'ai',
+    mark: 51,
+    gender: 'male'
+  },
+  {
+    _id: ObjectId('6613b3d17fb445125b8bf20b'),
+    roll: 3,
+    name: 'tam',
+    age: 20,
+    div: 'B',
+    dept: 'Ml',
+    mark: 52,
+    gender: 'male'
+  },
+  {
+    _id: ObjectId('6613b3d17fb445125b8bf20c'),
+    roll: 4,
+    name: 'dam',
+    age: 21,
+    div: 'C',
+    dept: 'mca',
+    mark: 60,
+    gender: 'male'
+  }
+]
+univ> db.mca.aggregate([{$group:{_id:'$gender',count:{$sum:1}}}]);
+[ { _id: 'male', count: 4 } ]
+univ>  db.mca.insert([{roll:5,name:'ham',age:22,div:'D',dept:"CS",mark:50,gender:"female"}]);
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('6613b9617fb445125b8bf20d') }
+}
+
+2)  univ> db.mca.find({ gender: "female" });
+[
+  {
+    _id: ObjectId('6613b9617fb445125b8bf20d'),
+    roll: 5,
+    name: 'ham',
+    age: 22,
+    div: 'D',
+    dept: 'CS',
+    mark: 50,
+    gender: 'female'
+  }
+]
+univ>
+
+3) univ> db.mca.find({ gender: "male" });
+[
+  {
+    _id: ObjectId('6613b3d17fb445125b8bf209'),
+    roll: 1,
+    name: 'ram',
+    age: 20,
+    div: 'A',
+    dept: 'ai',
+    mark: 50,
+    gender: 'male'
+  },
+  {
+    _id: ObjectId('6613b3d17fb445125b8bf20a'),
+    roll: 2,
+    name: 'sam',
+    age: 20,
+    div: 'A',
+    dept: 'ai',
+    mark: 51,
+    gender: 'male'
+  },
+  {
+    _id: ObjectId('6613b3d17fb445125b8bf20b'),
+    roll: 3,
+    name: 'tam',
+    age: 20,
+    div: 'B',
+    dept: 'Ml',
+    mark: 52,
+    gender: 'male'
+  },
+  {
+    _id: ObjectId('6613b3d17fb445125b8bf20c'),
+    roll: 4,
+    name: 'dam',
+    age: 21,
+    div: 'C',
+    dept: 'mca',
+    mark: 60,
+    gender: 'male'
+  }
+]
+
+
+4) univ> db.mca.aggregate([ { $group: { _id: "$dept", totalStudents: { $sum: 1 } } }] );
+[
+  { _id: 'Ml', totalStudents: 1 },
+  { _id: 'mca', totalStudents: 1 },
+  { _id: 'ai', totalStudents: 2 }
+]
+5) univ> db.mca.aggregate([{$match: { gender: "male" }},{ $group: {_id: "$dept",totalMaleEmployees: { $sum: 1 }} }]);
+[
+  { _id: 'Ml', totalMaleEmployees: 1 },
+  { _id: 'mca', totalMaleEmployees: 1 },
+  { _id: 'ai', totalMaleEmployees: 2 }
+
+6) univ> db.mca.aggregate([{$group: {_id: "$dept",avgMarks: { $avg: "$mark" } }}]);
+[
+  { _id: 'Ml', avgMarks: 52 },
+  { _id: 'mca', avgMarks: 60 },
+  { _id: 'ai', avgMarks: 50.5 }
+]
