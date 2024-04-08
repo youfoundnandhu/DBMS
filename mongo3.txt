@@ -1,0 +1,365 @@
+Microsoft Windows [Version 10.0.19045.4170]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\mlm>mongod  --version
+db version v7.0.6
+Build Info: {
+    "version": "7.0.6",
+    "gitVersion": "66cdc1f28172cb33ff68263050d73d4ade73b9a4",
+    "modules": [],
+    "allocator": "tcmalloc",
+    "environment": {
+        "distmod": "windows",
+        "distarch": "x86_64",
+        "target_arch": "x86_64"
+    }
+}
+
+C:\Users\mlm>mongosh
+Current Mongosh Log ID: 661343a3096c72ab4d8bf201
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.0
+Using MongoDB:          7.0.6
+Using Mongosh:          2.2.0
+mongosh 2.2.2 is available for download: https://www.mongodb.com/try/download/shell
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-04-08T06:36:55.911+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+college>
+switched to db college
+college> db.createCollection("stud")
+{ ok: 1 }
+college> db.s2mca.insert({roll:1,name:'ram',age:20,div:'A',sub:['phy','che']})
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('661346b0096c72ab4d8bf202') }
+}
+college> db.s2mca.insert({roll:2,name:'sam',age:21,div:'b',sub:['phy','mat']})
+{
+college>
+  insertedIds: { '0': ObjectId('6613482b096c72ab4d8bf203') }
+}
+college> db.s2mca.find()
+[
+  {cknowledged: true,
+    _id: ObjectId('661346b0096c72ab4d8bf202'),ab4d8bf205') }
+    roll: 1,
+    name: 'ram',
+    age: 20,
+    div: 'A',
+    sub: [ 'phy', 'che' ]
+  },
+  {
+    _id: ObjectId('6613482b096c72ab4d8bf203'),
+    roll: 2,
+    name: 'sam',
+    age: 21,
+    div: 'b',
+    sub: [ 'phy', 'mat' ]
+  },
+  {
+    _id: ObjectId('6613483c096c72ab4d8bf204'),
+    roll: 3,
+    name: 'june',
+    age: 21,
+    div: 'c',
+    sub: [ 'phy', 'eng' ]
+  },
+  {
+    _id: ObjectId('66134857096c72ab4d8bf205'),
+    roll: 3,
+    name: 'june',
+    age: 21,
+    div: 'c',
+    sub: [ 'phy', 'eng' ]
+  }
+]
+college> db.stud.find()
+
+college> db.stud.drop()
+true
+college> db.s2mca.find()
+[
+  {
+    _id: ObjectId('661346b0096c72ab4d8bf202'),
+    roll: 1,
+    name: 'ram',
+    age: 20,
+    div: 'A',
+    sub: [ 'phy', 'che' ]
+  },
+  {
+    _id: ObjectId('6613482b096c72ab4d8bf203'),
+    roll: 2,
+    name: 'sam',
+    age: 21,
+    div: 'b',
+    sub: [ 'phy', 'mat' ]
+  },
+  {
+    _id: ObjectId('6613483c096c72ab4d8bf204'),
+    roll: 3,
+    name: 'june',
+    age: 21,
+    div: 'c',
+    sub: [ 'phy', 'eng' ]
+  },
+  {
+    _id: ObjectId('66134857096c72ab4d8bf205'),
+    roll: 3,
+    name: 'june',
+    age: 21,
+    div: 'c',
+    sub: [ 'phy', 'eng' ]
+  }
+]
+college> db.s2mca.find()
+[
+  {
+    _id: ObjectId('661346b0096c72ab4d8bf202'),
+    roll: 1,
+    name: 'ram',
+    age: 20,
+    div: 'A',
+    sub: [ 'phy', 'che' ]
+  },
+  {
+    _id: ObjectId('6613482b096c72ab4d8bf203'),
+    roll: 2,
+    name: 'sam',
+    age: 21,
+    div: 'b',
+    sub: [ 'phy', 'mat' ]
+  },
+  {
+    _id: ObjectId('6613483c096c72ab4d8bf204'),
+    roll: 3,
+    name: 'june',
+    age: 21,
+    div: 'c',
+    sub: [ 'phy', 'eng' ]
+  },
+  {
+    _id: ObjectId('66134857096c72ab4d8bf205'),
+    roll: 3,
+    name: 'june',
+    age: 21,
+    div: 'c',
+    sub: [ 'phy', 'eng' ]
+  }
+]
+college> db.s2mca.aggregate([{$match:{age:{$gt:20}}}])
+[ { 'total stud in A': 1 } ]
+  {
+    _id: ObjectId('6613482b096c72ab4d8bf203'),
+    roll: 2,
+    name: 'sam',
+    age: 21,
+    div: 'b',
+    sub: [ 'phy', 'mat' ]
+  },
+  {
+    _id: ObjectId('6613483c096c72ab4d8bf204'),
+    roll: 3,
+    name: 'june',
+    age: 21,
+    div: 'c',
+    sub: [ 'phy', 'eng' ]
+  },
+  {
+    _id: ObjectId('66134857096c72ab4d8bf205'),
+    roll: 3,
+    name: 'june',
+    age: 21,
+    div: 'c',
+    sub: [ 'phy', 'eng' ]
+  }
+]
+college> db.s2mca.aggregate([{$match:{age:{$gt:20}}}])
+[
+  { _id: 'A', total_st: 1, max_age: 20 },
+    _id: ObjectId('6613482b096c72ab4d8bf203'),
+    roll: 2,, total_st: 1, max_age: 21 }
+    name: 'sam',
+    age: 21,
+    div: 'b',
+    sub: [ 'phy', 'mat' ]
+  },
+  {
+    _id: ObjectId('6613483c096c72ab4d8bf204'),
+    roll: 3,
+    name: 'june',
+    age: 21,
+    div: 'c',
+    sub: [ 'phy', 'eng' ]
+  },
+  {
+    _id: ObjectId('66134857096c72ab4d8bf205'),
+    roll: 3,
+    name: 'june',
+    age: 21,
+    div: 'c',
+    sub: [ 'phy', 'eng' ]
+  }
+]
+college> db.s2mca.aggregate([{'$sort':{'age':1}}])
+[
+  {
+    _id: ObjectId('661346b0096c72ab4d8bf202'),
+    roll: 1,
+    name: 'ram',
+    age: 20,
+    div: 'A',
+    sub: [ 'phy', 'che' ]
+  },
+  {
+    _id: ObjectId('6613482b096c72ab4d8bf203'),
+    roll: 2,
+    name: 'sam',
+    age: 21,
+    div: 'b',
+    sub: [ 'phy', 'mat' ]
+  },
+  {
+    _id: ObjectId('6613483c096c72ab4d8bf204'),
+    roll: 3,
+    name: 'june',
+    age: 21,
+    div: 'c',
+    sub: [ 'phy', 'eng' ]
+  },
+  {
+    _id: ObjectId('66134857096c72ab4d8bf205'),
+    roll: 3,
+    name: 'june',
+    age: 21,
+    div: 'c',
+    sub: [ 'phy', 'eng' ]
+  }
+]
+college> db.s2mca.aggregate([{'$sort':{'age':-1}}])
+[
+  {
+    _id: ObjectId('6613482b096c72ab4d8bf203'),
+    roll: 2,
+    name: 'sam',
+    age: 21,
+    div: 'b',
+    sub: [ 'phy', 'mat' ]
+  },
+  {
+    _id: ObjectId('6613483c096c72ab4d8bf204'),
+    roll: 3,
+    name: 'june',
+    age: 21,
+    div: 'c',
+    sub: [ 'phy', 'eng' ]
+  },
+  {
+    _id: ObjectId('66134857096c72ab4d8bf205'),
+    roll: 3,
+    name: 'june',
+    age: 21,
+    div: 'c',
+    sub: [ 'phy', 'eng' ]
+  },
+  {
+    _id: ObjectId('661346b0096c72ab4d8bf202'),
+    roll: 1,
+    name: 'ram',
+    age: 20,
+    div: 'A',
+    sub: [ 'phy', 'che' ]
+  }
+]
+college> db.s2mca.aggregate([{$unwind:'$sub'}])
+[
+  {
+    _id: ObjectId('661346b0096c72ab4d8bf202'),
+    roll: 1,
+    name: 'ram',
+    age: 20,
+    div: 'A',
+    sub: 'phy'y', 'che' ]
+  },
+  {
+    _id: ObjectId('661346b0096c72ab4d8bf202'),
+    roll: 1,
+    name: 'ram',
+    age: 20,
+    div: 'A',
+    sub: 'che'
+  },
+  {
+    _id: ObjectId('6613482b096c72ab4d8bf203'),
+    roll: 2,
+    name: 'sam',
+    age: 21,
+    div: 'b',
+    sub: 'phy'
+  },
+  {
+    _id: ObjectId('6613482b096c72ab4d8bf203'),
+    roll: 2,
+    name: 'sam',
+    age: 21,
+    div: 'b',
+    sub: 'mat'
+  },
+  {
+    _id: ObjectId('6613483c096c72ab4d8bf204'),
+    roll: 3,
+    name: 'june',
+    age: 21,
+    div: 'c',
+    sub: 'phy'
+  },
+  {
+    _id: ObjectId('6613483c096c72ab4d8bf204'),
+    roll: 3,
+    name: 'june',
+    age: 21,
+    div: 'c',
+    sub: 'eng'
+  },
+  {
+    _id: ObjectId('66134857096c72ab4d8bf205'),
+    roll: 3,
+    name: 'june',
+    age: 21,
+    div: 'c',
+    sub: 'phy'
+  },
+  {
+    _id: ObjectId('66134857096c72ab4d8bf205'),
+    roll: 3,
+    name: 'june',
+    age: 21,
+    div: 'c',
+    sub: 'eng'
+  }
+]
+college>
+[ { _id: null, count: 4 } ]: 20.75 } ]
+  {
+    _id: ObjectId('6613483c096c72ab4d8bf204'),
+    roll: 3,
+    name: 'june',
+    age: 21,
+    div: 'c',
+    sub: [ 'phy', 'eng' ]
+  },
+  {
+    _id: ObjectId('66134857096c72ab4d8bf205'),
+    roll: 3,
+    name: 'june',
+    age: 21,
+    div: 'c',
+    sub: [ 'phy', 'eng' ]
+  }
+college>
